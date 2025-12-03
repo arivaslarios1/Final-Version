@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="ManagePro — About, demo, and contact information."
+    />
+    <title>ManagePro • Web Application</title>
+
+    <!-- Kill any #hash before the browser auto-scrolls -->
+    <script>
+      if (location.hash) {
+        history.replaceState(null, '', location.pathname + location.search);
+        window.scrollTo(0, 0);
+      }
+      if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    </script>
+
+    <link rel="icon" href="/favicon.ico" />
+    <link rel="stylesheet" href="assets/style.css" />
+    <link rel="stylesheet" href="assets/mediaqueries.css" />
+  </head>
+
+  <body>
+    <header>
+
+        <a
+        class="download-cta"
+        href="signup.html"
+        target="_blank"
+        rel="noopener"
+        aria-label="Download IMS"
+        >Sign Up</a>
+
+      <!-- Desktop navigation -->
+      <nav id="desktop-nav" aria-label="Primary">
+        <ul class="nav-links" role="list">
+          <li><a href="#about">About</a></li>
+          <li><a href="#demo">Demo</a></li>
+          <!-- Removed #contact to prevent hash; JS will smooth scroll -->
+          <li><a href="#" data-jump-contact>Contact</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </nav>
+
+      <!-- Mobile (hamburger) navigation -->
+      <nav id="hamburger-nav" aria-label="Primary (mobile)">
+        <div class="hamburger-menu">
+          <button
+            class="hamburger-icon"
+            id="hamburger-button"
+            aria-label="Open navigation menu"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            type="button"
+          >
+            <span></span><span></span><span></span>
+          </button>
+
+          <ul id="mobile-menu" class="menu-links" role="list">
+            <li><a href="#about" data-close-menu>About</a></li>
+            <li><a href="#demo" data-close-menu>Demo</a></li>
+            <!-- Removed #contact; keep close + jump -->
+            <li><a href="#" data-close-menu data-jump-contact>Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container">
+      <!-- HERO -->
+      <section id="profile" aria-labelledby="profile-title">
+        <div class="section__text">
+          <h1 id="profile-title" class="title">ManagePro</h1>
+          <p class="section__text__p2">Making Business Easy</p>
+
+          <div class="btn-container">
+            <button class="btn btn-color-1" type="button" data-jump-contact>
+              Contact Info
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section id="about" aria-labelledby="about-title" class="reveal">
+        <p class="section__text__p1">Get To Know More</p>
+        <h2 id="about-title" class="title">About IMS</h2>
+
+        <div class="section-container section-inner">
+          <figure class="section__pic-container">
+            <img
+              src="./logos/MP_Logo.png"
+              alt="Logo of ManagePro"
+              class="about-logo"
+              loading="lazy"
+            />
+          </figure>
+
+            <div class="text-container">
+              <p>
+                ManagePro will provide small and medium-sized businesses with a reliable, cost-effective, and 
+                user-friendly tool for managing inventory. By addressing issues of inaccuracy, complexity, and limited
+                visibility, the system will improve efficiency, reduce errors, and help businesses make better decisions. 
+                It's a combination of practical functionality with accessible design, ensuring a valuable
+                asset for retail stores looking to stay competitive in today’s market.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEMO -->
+      <section id="demo" aria-labelledby="demo-title" class="reveal">
+        <p class="section__text__p1">Explore</p>
+        <h2 id="demo-title" class="title">Demonstration</h2>
+
+        <figure class="section__pic-container">
+            <img
+              src="./logos/DEMO.png"
+              alt="Demonstration of ManagePro"
+              class="about-pic"
+              loading="lazy"
+            />
+        </figure>
+        <p class = "title">Easy To Use And Understand</p>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact" aria-labelledby="contact-title" class="reveal">
+        <h2 id="contact-title" class="title">Contact</h2>
+
+        <div class="contact-info-upper-container">
+          <div class="contact-info-container">
+            <img src="./logos/Emaillogo.png" alt="" class="icon email-icon" aria-hidden="true" />
+            <p><a href="mailto:hello@example.com">hello@example.com</a></p>
+          </div>
+    
+        </div>
+      </section>
+    </main>
+
+    <!-- Global arrow (next section) -->
+    <button class="icon arrow" type="button" aria-label="Next section">
+      <img src="./logos/downarrow.png" alt="" aria-hidden="true" />
+    </button>
+
+    <footer>
+      <nav aria-label="Footer">
+        <div class="nav-links-container">
+          <ul class="nav-links" role="list">
+            <li><a href="#about">About</a></li>
+            <li><a href="#demo">Demo</a></li>
+            <!-- Removed #contact -->
+            <li><a href="#" data-jump-contact>Contact</a></li>
+          </ul>
+        </div>
+      </nav>
+      <p>Copyright &#169; <span id="year">2025</span> IMS. All Rights Reserved.</p>
+    </footer>
+
+    <script src="assets/app.js" defer></script>
+    <script src="assets/ui.js" defer></script>
+  </body>
+</html>
+
+<!--
+cd /Users/angelrl/Desktop/CSC-481-FInal-Project-main/backend
+mvn clean spring-boot:run -DskipTests -Dspring-boot.run.arguments=--server.port=8081
+admin@example.com
+admin000
+-->

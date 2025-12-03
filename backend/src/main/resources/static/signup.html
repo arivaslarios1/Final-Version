@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Create your account</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/mediaqueries.css">
+  <style>
+    .auth-wrap { min-height: 100svh; display:flex; align-items:center; justify-content:center; padding:24px; background: var(--bg, #0e0f12);}
+    .auth-card { width: 100%; max-width: 980px; background:#111418; border:1px solid #23262d; border-radius:16px; box-shadow: 0 10px 30px rgba(0,0,0,.35); overflow:hidden; }
+    .auth-grid { display:grid; grid-template-columns: 1.1fr .9fr; gap:0; }
+    @media (max-width: 900px){ .auth-grid{ grid-template-columns:1fr; } }
+    .pane { padding:28px 28px; }
+    .pane h1 { margin:0 0 16px; font-size: 28px; color:#e7e9ee; letter-spacing:.2px; }
+    .sub { color:#9aa3b2; margin-bottom:24px; }
+    .field { display:flex; flex-direction:column; gap:8px; margin:12px 0 16px; }
+    .row { display:flex; gap:12px; }
+    .row .field { flex:1; margin:0; }
+    .label { font-weight:600; color:#cbd5e1; font-size:14px; }
+    .input {
+      background:#0c0f13; border:1px solid #2a2f37; border-radius:10px;
+      padding:12px 14px; color:#e7e9ee; outline:none; transition:.15s border-color, .15s box-shadow;
+    }
+    .input:focus { border-color:#3b82f6; box-shadow: 0 0 0 3px rgba(59,130,246,.18); }
+    .hint { color:#8b95a7; font-size:12px; }
+    .btn {
+      appearance:none; border:0; border-radius:10px; padding:12px 16px; font-weight:700; cursor:pointer;
+      background:#3b82f6; color:white; transition:.15s transform,.15s filter; width:100%;
+    }
+    .btn:hover { filter: brightness(1.05); transform: translateY(-1px); }
+    .btn.secondary { background:#1f2937; color:#dbe3f0; }
+    .divider { height:1px; background:#20242b; margin:24px 0; }
+    .plan { display:flex; align-items:center; justify-content:space-between; gap:12px; background:#0c0f13; border:1px solid #2a2f37; border-radius:10px; padding:14px; }
+    .plan input { transform: scale(1.2); }
+    .pm-box {
+      background:#0c0f13; border:1px dashed #3b82f6; border-radius:12px; padding:16px; color:#9aa3b2;
+    }
+    .pm-row { display:flex; align-items:center; gap:12px; margin-top:10px; }
+    .pm-badges { display:flex; gap:6px; flex-wrap:wrap; }
+    .pm-badges span { background:#141820; border:1px solid #242a33; color:#cdd6e4; font-size:12px; padding:6px 8px; border-radius:8px; }
+    .small { font-size:12px; color:#8b95a7; }
+    .links { margin-top:14px; font-size:14px; }
+    .links a { color:#93c5fd; text-decoration:none; }
+  </style>
+</head>
+
+<body class="auth-wrap">
+  <div class="auth-card">
+    <div class="auth-grid">
+      <!-- Account pane -->
+      <section class="pane" aria-label="Create account">
+        <h1>Create your account</h1>
+
+        <!-- NOTE: no onsubmit attribute here -->
+        <form id="signupForm" novalidate>
+          <div class="divider"></div>
+
+          <h2 style="color:#e7e9ee; font-size:18px; margin:0 0 8px;">Locations</h2>
+          <div class="row" role="group" aria-label="Business locations">
+            <label class="plan" style="flex:1">
+              <input type="radio" name="locMode" id="loc-single" value="single" checked>
+              <div>
+                <strong style="color:#e7e9ee;">Single location</strong>
+                <div class="small">Base plan</div>
+              </div>
+            </label>
+
+            <label class="plan" style="flex:1">
+              <input type="radio" name="locMode" id="loc-multi" value="multi">
+              <div>
+                <strong style="color:#e7e9ee;">Multiple locations</strong>
+                <div class="small">Adds per-location fee</div>
+              </div>
+            </label>
+          </div>
+
+          <div class="field" id="loc-count-wrap" style="display:none; margin-top:10px;">
+            <label class="label" for="loc-count">How many locations?</label>
+            <input class="input" id="loc-count" type="number" min="2" value="2" />
+            <div class="small">Additional Charge Of $5 Each</div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label class="label" for="r-name">Full name</label>
+              <input class="input" id="r-name" type="text" placeholder="Jane Doe" required>
+            </div>
+            <div class="field">
+              <label class="label" for="r-email">Email</label>
+              <input class="input" id="r-email" type="email" placeholder="you@example.com" autocomplete="email" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="field">
+              <label class="label" for="r-password">Password</label>
+              <input class="input" id="r-password" type="password" placeholder="At least 4 characters" minlength="4" autocomplete="new-password" required>
+            </div>
+            <div class="field">
+              <label class="label" for="r-password2">Confirm password</label>
+              <input class="input" id="r-password2" type="password" placeholder="Re-enter password" minlength="4" required>
+            </div>
+          </div>
+
+          <div class="divider"></div>
+
+          <button class="btn" type="submit">Create account</button>
+          <div class="links">
+            Just log in to your demo account? <a href="login.html">Go to login</a>
+          </div>
+        </form>
+      </section>
+
+      <!-- Payment pane (visual only) -->
+      <aside class="pane" aria-label="Payment">
+        <h1>Subscription</h1>
+
+        <div class="plan" role="group" aria-label="Plan">
+          <div>
+            <strong style="color:#e7e9ee;">Monthly</strong>
+            <div class="small">Cancel anytime</div>
+          </div>
+          <div style="text-align:right">
+            <div style="color:#e7e9ee; font-weight:800; font-size:20px;">$19<span class="small">/mo</span></div>
+            <span class="small">Demo only</span>
+          </div>
+        </div>
+
+        <div class="field" style="margin-top:16px;">
+          <label class="label">Payment method</label>
+          <div class="pm-box">
+            <div class="pm-row">
+              <div class="pm-badges">
+                <span>Visa</span><span>Mastercard</span><span>Amex</span><span>Apple Pay</span><span>Google Pay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="billing-name">Billing name (optional)</label>
+          <input class="input" id="billing-name" type="text" placeholder="Name on receipt">
+        </div>
+        <div class="row">
+          <div class="field">
+            <label class="label" for="billing-city">City</label>
+            <input class="input" id="billing-city" type="text" placeholder="City">
+          </div>
+          <div class="field">
+            <label class="label" for="billing-zip">ZIP / Postal</label>
+            <input class="input" id="billing-zip" type="text" placeholder="ZIP">
+          </div>
+        </div>
+
+        <div class="divider"></div>
+        <button class="btn secondary" type="button" disabled>Add Payment</button>
+      </aside>
+    </div>
+  </div>
+
+  <!-- Your shared JS (kept) -->
+  <script src="assets/app.js" defer></script>
+  <script src="assets/ui.js" defer></script>
+
+  <!-- Signup logic: simple, direct fetch to backend -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const form       = document.getElementById('signupForm');
+      const locSingle  = document.getElementById('loc-single');
+      const locMulti   = document.getElementById('loc-multi');
+      const locWrap    = document.getElementById('loc-count-wrap');
+
+      function syncLocations() {
+        locWrap.style.display = locMulti.checked ? 'block' : 'none';
+      }
+      if (locSingle && locMulti && locWrap) {
+        locSingle.addEventListener('change', syncLocations);
+        locMulti.addEventListener('change', syncLocations);
+        syncLocations();
+      }
+
+      function validatePasswords() {
+        const p1 = document.getElementById('r-password').value;
+        const p2 = document.getElementById('r-password2').value;
+        if (p1.length < 4) {
+          alert('Password must be at least 4 characters (for demo you can use 0000).');
+          return false;
+        }
+        if (p1 !== p2) {
+          alert('Passwords do not match.');
+          return false;
+        }
+        return true;
+      }
+
+      if (!form) return;
+
+      form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const name     = document.getElementById('r-name').value.trim();
+        const email    = document.getElementById('r-email').value.trim();
+        const password = document.getElementById('r-password').value;
+
+        if (!name || !email || !password) {
+          alert('Please fill in name, email and password.');
+          return;
+        }
+        if (!validatePasswords()) return;
+
+        try {
+          // If you ever serve the frontend from VS Code Live Server instead of Spring Boot:
+          // change '/api/auth/register' to 'http://localhost:8081/api/auth/register'
+          const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+          });
+
+          if (!res.ok) {
+            alert('Signup failed with status ' + res.status);
+            return;
+          }
+
+          const data = await res.json(); // { token: "..." }
+          localStorage.setItem('token', data.token);
+
+          alert('Account created! You are now logged in.');
+          window.location.href = 'app.html';
+        } catch (err) {
+          console.error(err);
+          alert('Network error while signing up.');
+        }
+      });
+    });
+  </script>
+</body>
+</html>

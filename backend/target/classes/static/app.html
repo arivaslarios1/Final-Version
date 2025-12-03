@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>IMS • Inventory UI</title>
+
+  <link rel="stylesheet" href="assets/style.css" />
+  <link rel="stylesheet" href="assets/mediaqueries.css" />
+</head>
+
+<!-- NOTE: removed onload="loadCurrentUser()" so it won't redirect -->
+<body>
+
+  <!-- NAVIGATION -->
+  <header>
+    <nav id="desktop-nav">
+      <ul class="nav-links">
+        <li><a href="login.html">Log Out</a></li>
+      </ul>
+    </nav>
+
+    <nav id="hamburger-nav">
+      <div class="hamburger-menu">
+        <button id="hamburger-button" class="hamburger-icon" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+        <ul class="menu-links" id="mobile-menu">
+          <li><a href="login.html" data-close-menu>Log Out</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    <section id="ui">
+      <h1 class="title">Inventory Dashboard</h1>
+
+      <!-- ----- ADD PRODUCT + TABLE WRAPPER ----- -->
+      <div class="details-container" style="margin-top:2rem;">
+
+        <!-- ---------- ADD PRODUCT FORM ---------- -->
+        <form id="add-product-form" style="margin-bottom:1.5rem;">
+          <div style="display:flex; flex-wrap:wrap; gap:0.75rem; align-items:flex-end;">
+
+            <!-- CATEGORY DROPDOWN -->
+            <div style="flex:1 1 150px;">
+              <label style="display:block; margin-bottom:0.25rem;">Category</label>
+              <select id="cat-input" required
+                      style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+                <option value="" disabled selected>Select category</option>
+                <option>Clothing</option>
+                <option>Electronics</option>
+                <option>Groceries</option>
+                <option>Other</option>
+              </select>
+            </div>
+
+            <!-- PRODUCT NAME -->
+            <div style="flex:2 1 200px;">
+              <label style="display:block; margin-bottom:0.25rem;">Product</label>
+              <input type="text" id="name-input" placeholder="Product name" required
+                style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+            </div>
+
+            <!-- QTY -->
+            <div style="flex:0 1 90px;">
+              <label style="display:block; margin-bottom:0.25rem;">Qty</label>
+              <input type="number" id="qty-input" min="0" value="1" required
+                style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+            </div>
+
+            <!-- PRICE -->
+            <div style="flex:0 1 110px;">
+              <label style="display:block; margin-bottom:0.25rem;">Price ($)</label>
+              <input type="number" id="price-input" min="0" value="0.00" step="0.01" required
+                style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+            </div>
+
+            <!-- Location -->
+            <div style="flex:0 1 110px;">
+              <label style="display:block; margin-bottom:0.25rem;">Location</label>
+              <input type="number" id="price-input" min="1" value="1" step="1" required
+                style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+            </div>
+
+            <!-- STATUS -->
+            <div style="flex:0 1 140px;">
+              <label style="display:block; margin-bottom:0.25rem;">Status</label>
+              <select id="status-input"
+                style="width:100%; padding:0.45rem; border-radius:0.5rem; border:1px solid #3a4660;">
+                <option>In Stock</option>
+                <option>Low Stock</option>
+                <option>Out of Stock</option>
+              </select>
+            </div>
+
+            <!-- BUTTON -->
+            <div style="flex:0 1 auto;">
+              <button type="submit" class="btn btn-color-1" style="padding:0.55rem 1.2rem;">
+                Add Product
+              </button>
+            </div>
+
+          </div>
+        </form>
+
+        <!-- ---------- INVENTORY TABLE ---------- -->
+        <table style="width:100%; border-collapse:collapse; font-size:0.95rem;">
+          <thead>
+            <tr>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:left;">Category</th>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:left;">Product</th>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:right;">Quantity</th>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:right;">Price</th>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:center;">Status</th>
+              <th style="padding:0.6rem; border-bottom:1px solid var(--border); text-align:center;">Actions</th>
+            </tr>
+          </thead>
+
+          <tbody id="inventory-body">
+            <!-- Initial Example Rows -->
+            <tr>
+              <td style="padding:0.5rem;">Clothing</td>
+              <td style="padding:0.5rem;">T-Shirt</td>
+              <td style="padding:0.5rem; text-align:right;">25</td>
+              <td style="padding:0.5rem; text-align:right;">$14.99</td>
+              <td style="padding:0.5rem; text-align:center;">In Stock</td>
+              <td style="padding:0.5rem; text-align:center;">
+                <button class="btn btn-color-2 delete-btn" style="padding:0.25rem 0.8rem;">Delete</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0.5rem;">Electronics</td>
+              <td style="padding:0.5rem;">Bluetooth Speaker</td>
+              <td style="padding:0.5rem; text-align:right;">5</td>
+              <td style="padding:0.5rem; text-align:right;">$39.99</td>
+              <td style="padding:0.5rem; text-align:center;">Low Stock</td>
+              <td style="padding:0.5rem; text-align:center;">
+                <button class="btn btn-color-2 delete-btn" style="padding:0.25rem 0.8rem;">Delete</button>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0.5rem;">Groceries</td>
+              <td style="padding:0.5rem;">Organic Apples (Bag)</td>
+              <td style="padding:0.5rem; text-align:right;">0</td>
+              <td style="padding:0.5rem; text-align:right;">$4.99</td>
+              <td style="padding:0.5rem; text-align:center; color:#ff6b6b;">Out of Stock</td>
+              <td style="padding:0.5rem; text-align:center;">
+                <button class="btn btn-color-2 delete-btn" style="padding:0.25rem 0.8rem;">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Copyright © <span id="year">2025</span> IMS. All Rights Reserved.</p>
+  </footer>
+
+  <!-- IMPORTANT: for the demo, we disable app.js & ui.js so they can't redirect -->
+  <!-- <script src="assets/app.js" defer></script> -->
+  <!-- <script src="assets/ui.js" defer></script> -->
+
+  <!-- ADD + DELETE FUNCTIONALITY -->
+  <script>
+    (function () {
+      const form     = document.getElementById("add-product-form");
+      const tbody    = document.getElementById("inventory-body");
+      const catIn    = document.getElementById("cat-input");
+      const nameIn   = document.getElementById("name-input");
+      const qtyIn    = document.getElementById("qty-input");
+      const priceIn  = document.getElementById("price-input");
+      const statusIn = document.getElementById("status-input");
+
+      if (!form || !tbody) return;
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        const category = catIn.value;
+        const name     = nameIn.value.trim();
+        const qty      = Number(qtyIn.value);
+        const price    = Number(priceIn.value).toFixed(2);
+        const status   = statusIn.value;
+
+        const tr = document.createElement("tr");
+
+        tr.innerHTML = `
+          <td style="padding:0.5rem;">${category}</td>
+          <td style="padding:0.5rem;">${name}</td>
+          <td style="padding:0.5rem; text-align:right;">${qty}</td>
+          <td style="padding:0.5rem; text-align:right;">$${price}</td>
+          <td style="padding:0.5rem; text-align:center;${status === "Out of Stock" ? "color:#ff6b6b;" : ""}">
+            ${status}
+          </td>
+          <td style="padding:0.5rem; text-align:center;">
+            <button class="btn btn-color-2 delete-btn" style="padding:0.25rem 0.8rem;">Delete</button>
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+        form.reset();
+        qtyIn.value = 1;
+        priceIn.value = "0.00";
+      });
+
+      tbody.addEventListener("click", function (e) {
+        if (e.target.matches(".delete-btn")) {
+          const row = e.target.closest("tr");
+          if (row) row.remove();
+        }
+      });
+    })();
+  </script>
+
+</body>
+</html>

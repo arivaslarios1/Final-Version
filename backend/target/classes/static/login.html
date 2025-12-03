@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Log in – ManagePro</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="stylesheet" href="assets/mediaqueries.css">
+  <style>
+    .auth-wrap { min-height: 100svh; display:flex; align-items:center; justify-content:center; padding:24px; background:#0e0f12;}
+    .auth-card { width:100%; max-width:480px; background:#111418; border:1px solid #23262d; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,.35); padding:28px 24px; }
+    .auth-card h1 { margin:0 0 10px; font-size:26px; color:#e7e9ee; letter-spacing:.2px; }
+    .sub { color:#9aa3b2; margin-bottom:20px; font-size:14px; }
+    .field { display:flex; flex-direction:column; gap:8px; margin:12px 0 16px; }
+    .label { font-weight:600; color:#cbd5e1; font-size:14px; }
+    .input {
+      background:#0c0f13; border:1px solid #2a2f37; border-radius:10px;
+      padding:12px 14px; color:#e7e9ee; outline:none; transition:.15s border-color,.15s box-shadow;
+    }
+    .input:focus { border-color:#3b82f6; box-shadow:0 0 0 3px rgba(59,130,246,.18); }
+    .btn {
+      appearance:none; border:0; border-radius:10px; padding:12px 16px; font-weight:700; cursor:pointer;
+      background:#3b82f6; color:white; transition:.15s transform,.15s filter; width:100%; margin-top:8px;
+    }
+    .btn:hover { filter:brightness(1.05); transform:translateY(-1px); }
+    .links { margin-top:14px; font-size:14px; color:#9aa3b2; }
+    .links a { color:#93c5fd; text-decoration:none; }
+    .error { color:#fecaca; font-size:13px; margin-top:4px; display:none; }
+    .demo-hint { margin-top:8px; font-size:13px; color:#4ade80; }
+  </style>
+</head>
+<body class="auth-wrap">
+  <div class="auth-card">
+    <h1>Welcome back</h1>
+    <p class="sub">Log in to manage your inventory dashboard.</p>
+
+    <form id="loginForm" onsubmit="return demoLogin(event)" novalidate>
+      <div class="field">
+        <label class="label" for="email">Email</label>
+        <input class="input" id="email" type="email" placeholder="you@example.com" autocomplete="email" required>
+      </div>
+
+      <div class="field">
+        <label class="label" for="password">Password</label>
+        <input class="input" id="password" type="password" placeholder="Your password" autocomplete="current-password" required>
+      </div>
+
+      <div id="login-error" class="error"></div>
+
+      <button class="btn" type="submit">Log in</button>
+    </form>
+
+    <div class="links">
+      Don’t have an account yet? <a href="signup.html">Create one</a>
+    </div>
+  </div>
+
+  <script>
+    // SUPER SIMPLE DEMO LOGIN: no backend, just checks the values
+    function demoLogin(event) {
+      event.preventDefault();
+
+      const errorBox = document.getElementById('login-error');
+      errorBox.style.display = 'none';
+      errorBox.textContent = '';
+
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      if (email === 'admin@example.com' && password === 'admin000') {
+        // Store a fake token so your app JS can read it if it wants
+        localStorage.setItem('token', 'demo-admin-token');
+        alert('Demo login success! Redirecting to the app...');
+        window.location.href = 'app.html';
+        return false;
+      }
+
+      errorBox.textContent = 'Login failed. For the demo, use admin@example.com / admin000';
+      errorBox.style.display = 'block';
+      return false;
+    }
+  </script>
+</body>
+</html>
